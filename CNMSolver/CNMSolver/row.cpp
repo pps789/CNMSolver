@@ -1,10 +1,10 @@
 #include"helper.h"
 
-row row::move(direction d) const{
+row row::move_naive(direction d) const{
 	if (d == R){
 		row r = *this;
 		reverse(r.c, r.c + 8);
-		return r.move(L);
+		return r.move_naive(L);
 	}
 	else{
 		row ret;
@@ -39,4 +39,37 @@ row row::decode(int x){
 		x /= 3;
 	}
 	return ret;
+}
+
+void row::create_map(){
+	for (int i = 0; i < ROW_MAX; i++){
+		row r = row::decode(i);
+		row ll = r.move_naive(L),
+			rr = r.move_naive(R);
+		m[L][r] = ll;
+		m[R][r] = rr;
+		b[L][ll].push_back(r);
+		b[R][rr].push_back(r);
+	}
+}
+
+char row::get(int x) const{
+	return this->c[x];
+}
+
+void row::set(int x, char c){
+	this->c[x] = c;
+}
+
+row row::move(direction d){
+	return m[d][*this];
+}
+
+row::row(){
+	for (int i = 0; i < 8; i++) c[i] = EMPTY;
+	if (m[L].size() == 0) create_map();
+}
+
+row::row(const row& r){
+	for (int i = 0; i < 8; i++) c[i] = r.c[i];
 }

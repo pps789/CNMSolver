@@ -8,13 +8,14 @@ using namespace std;
 
 enum direction { L, R, D, U };
 const char WALL = 'W', BLOCK = 'B', EMPTY = '.';
+const int ROW_MAX = 6561;
 
 class row{
 private:
 	char c[8];
 	static map<row, row> m[2]; // cache of moving
 	static map<row, vector<row> > b[2]; // cache of moving; barkwords
-	row move(direction d) const; // only L, R.
+	row move_naive(direction d) const; // only L, R.
 	
 	static int incode(const row& r);
 	static row decode(int x);
@@ -22,6 +23,11 @@ private:
 public:
 	static void create_map();
 	char get(int x) const;
+	void set(int x, char c);
+	row move(direction d); // only L, R.
+
+	row();
+	row(const row& r);
 };
 
 class state{
