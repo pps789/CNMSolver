@@ -23,6 +23,10 @@ vector<direction> solve(
 	q.push(st);
 	q.push(ed);
 	state pos, neg;
+
+	int max_cost = 0;
+	int min_cost = 0;
+
 	while (!q.empty()){
 		state here = q.front();
 		q.pop();
@@ -35,6 +39,7 @@ vector<direction> solve(
 					p.d = sd.second;
 					p.s = here;
 					dp[sd.first] = p;
+					q.push(sd.first);
 				}
 				else if (dp[sd.first].c < 0){
 					q = queue<state>();
@@ -45,6 +50,10 @@ vector<direction> solve(
 			}
 		}
 		else if (cost < 0){
+			if (2 * (-cost) > max_cost){
+				q.push(here);
+				continue;
+			}
 			auto cond_prev = here.get_prev();
 			for (auto sd : cond_prev){
 				if (!dp.count(sd.first)){
@@ -52,6 +61,7 @@ vector<direction> solve(
 					p.d = sd.second;
 					p.s = here;
 					dp[sd.first] = p;
+					q.push(sd.first);
 				}
 				else if (dp[sd.first].c > 0){
 					q = queue<state>();
@@ -61,7 +71,18 @@ vector<direction> solve(
 				}
 			}
 		}
+		if (dp.size() % 100000 == 0)cout << "SIZE: " << dp.size() << endl;
+		if (cost > max_cost){
+			cout << "STEP: " << cost << endl;
+			max_cost = cost;
+		}
+		else if (cost < min_cost){
+			cout << "STEP: " << cost << endl;
+			min_cost = cost;
+		}
 	}
+
+	cout << "Search done!" << endl;
 
 	vector<direction> ret;
 	for (state it = pos; it != st; it = dp[it].s)

@@ -4,14 +4,19 @@ row row::move_naive(direction d) const{
 	if (d == R){
 		row r = *this;
 		reverse(r.c, r.c + 8);
-		return r.move_naive(L);
+		r = r.move_naive(L);
+		reverse(r.c, r.c + 8);
+		return r;
 	}
 	else{
 		row ret;
 		ret.c[0] = this->c[0];
 		for (int i = 1; i < 8; i++){
 			if (this->c[i] == WALL) ret.c[i] = WALL;
-			else if (this->c[i] == BLOCK && ret.c[i - 1] == EMPTY) ret.c[i - 1] = BLOCK;
+			else if (this->c[i] == BLOCK){
+				if (ret.c[i - 1] == EMPTY) ret.c[i - 1] = BLOCK;
+				else ret.c[i] = BLOCK;
+			}
 		}
 		return ret;
 	}
@@ -71,11 +76,14 @@ vector<row> row::move_backward(direction d) const{
 
 row::row(){
 	for (int i = 0; i < 8; i++) c[i] = EMPTY;
-	if (m[L].size() == 0) create_map();
 }
 
 row::row(const row& r){
 	for (int i = 0; i < 8; i++) c[i] = r.c[i];
+}
+
+row::row(const string& s){
+	for (int i = 0; i < 8; i++) c[i] = s[i];
 }
 
 bool row::operator<(const row& rhs) const{

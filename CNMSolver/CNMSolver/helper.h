@@ -3,6 +3,7 @@
 #include<vector>
 #include<iostream>
 #include<queue>
+#include<string>
 using namespace std;
 
 #ifndef _HELPER_H_
@@ -21,9 +22,9 @@ private:
 	
 	static int incode(const row& r);
 	static row decode(int x);
-	static void create_map();
 
 public:
+	static void create_map();
 	char get(int x) const;
 	void set(int x, char c);
 	row move(direction d) const; // only L, R.
@@ -31,6 +32,7 @@ public:
 
 	row();
 	row(const row& r);
+	row(const string& s);
 
 	bool operator<(const row& rhs) const;
 	bool operator==(const row& rhs) const;

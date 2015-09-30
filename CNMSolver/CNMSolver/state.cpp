@@ -20,8 +20,8 @@ state state::move(direction d) const{
 	}
 	else{
 		state t = this->transpose();
-		if (d == U) return t.move(L);
-		else return t.move(R);
+		if (d == U) return t.move(L).transpose();
+		else return t.move(R).transpose();
 	}
 }
 
