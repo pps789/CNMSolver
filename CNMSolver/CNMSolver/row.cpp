@@ -61,7 +61,7 @@ void row::set(int x, char c){
 	this->c[x] = c;
 }
 
-row row::move(direction d){
+row row::move(direction d) const{
 	return m[d][*this];
 }
 

@@ -24,7 +24,7 @@ public:
 	static void create_map();
 	char get(int x) const;
 	void set(int x, char c);
-	row move(direction d); // only L, R.
+	row move(direction d) const; // only L, R.
 
 	row();
 	row(const row& r);
@@ -37,6 +37,9 @@ private:
 public:
 	char get(int x, int y);
 	state move(direction d) const;
+
+	state();
+	state(const state& s);
 };
 
 #endif
