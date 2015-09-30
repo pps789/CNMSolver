@@ -86,5 +86,16 @@ bool row::operator<(const row& rhs) const{
 	return false;
 }
 
+bool row::operator!=(const row& rhs) const{
+	for (int i = 0; i < 8; i++)
+		if (c[i] != rhs.c[i])
+			return true;
+	return false;
+}
+
+bool row::operator==(const row& rhs) const{
+	return !(this->operator!=(rhs));
+}
+
 map<row, row> row::m[2];
 map<row, vector<row> > row::b[2];

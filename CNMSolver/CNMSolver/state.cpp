@@ -45,6 +45,17 @@ bool state::operator<(const state& rhs) const{
 	return false;
 }
 
+bool state::operator!=(const state& rhs) const{
+	for (int i = 0; i < 8; i++)
+		if (c[i] != rhs.c[i])
+			return true;
+	return false;
+}
+
+bool state::operator==(const state& rhs) const{
+	return !(this->operator!=(rhs));
+}
+
 vector<state> state::move_backward(direction d) const{
 	if (d == U || d == D){
 		state t = this->transpose();
@@ -76,4 +87,25 @@ vector<state> state::move_backward(direction d) const{
 		for (const auto& v : cart) ret.push_back(state(v));
 		return ret;
 	}
+}
+
+vector<pair<state, direction> > state::get_next() const{
+	vector<pair<state, direction> > ret;
+	for (int i = 0; i < 4; i++){
+		direction d = (direction)i;
+		state s = move(d);
+		ret.push_back(pair<state, direction>(s, d));
+	}
+	return ret;
+}
+
+vector<pair<state, direction> > state::get_prev() const{
+	vector<pair<state, direction> > ret;
+	for (int i = 0; i < 4; i++){
+		direction d = (direction)i;
+		vector<state> vs = move_backward(d);
+		for (const state& s : vs)
+			ret.push_back(pair<state, direction>(s, d));
+	}
+	return ret;
 }

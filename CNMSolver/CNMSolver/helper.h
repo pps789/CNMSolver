@@ -2,12 +2,13 @@
 #include<map>
 #include<vector>
 #include<iostream>
+#include<queue>
 using namespace std;
 
 #ifndef _HELPER_H_
 #define _HELPER_H_
 
-enum direction { L, R, D, U };
+enum direction { L, R, D, U, DIR_LAST };
 const char WALL = 'W', BLOCK = 'B', EMPTY = '.';
 const int ROW_MAX = 6561;
 
@@ -32,6 +33,8 @@ public:
 	row(const row& r);
 
 	bool operator<(const row& rhs) const;
+	bool operator==(const row& rhs) const;
+	bool operator!=(const row& rhs) const;
 };
 
 class state{
@@ -43,11 +46,16 @@ public:
 	state move(direction d) const;
 	vector<state> move_backward(direction d) const;
 
+	vector<pair<state, direction> > get_next() const;
+	vector<pair<state, direction> > get_prev() const;
+
 	state();
 	state(const state& s);
 	state(const vector<row>& v);
 
 	bool operator<(const state& rhs) const;
+	bool operator==(const state& rhs) const;
+	bool operator!=(const state& rhs) const;
 };
 
 vector<direction> solve(const state& st, const state& ed);
