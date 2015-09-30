@@ -65,6 +65,10 @@ row row::move(direction d) const{
 	return m[d][*this];
 }
 
+vector<row> row::move_backward(direction d) const{
+	return b[d][*this];
+}
+
 row::row(){
 	for (int i = 0; i < 8; i++) c[i] = EMPTY;
 	if (m[L].size() == 0) create_map();
@@ -73,3 +77,14 @@ row::row(){
 row::row(const row& r){
 	for (int i = 0; i < 8; i++) c[i] = r.c[i];
 }
+
+bool row::operator<(const row& rhs) const{
+	for (int i = 0; i < 8; i++){
+		if (this->c[i] < rhs.c[i]) return true;
+		else if (this->c[i] > rhs.c[i]) return false;
+	}
+	return false;
+}
+
+map<row, row> row::m[2];
+map<row, vector<row> > row::b[2];

@@ -1,6 +1,7 @@
 #include<algorithm>
 #include<map>
 #include<vector>
+#include<iostream>
 using namespace std;
 
 #ifndef _HELPER_H_
@@ -19,15 +20,18 @@ private:
 	
 	static int incode(const row& r);
 	static row decode(int x);
+	static void create_map();
 
 public:
-	static void create_map();
 	char get(int x) const;
 	void set(int x, char c);
 	row move(direction d) const; // only L, R.
+	vector<row> move_backward(direction d) const; // only L, R.
 
 	row();
 	row(const row& r);
+
+	bool operator<(const row& rhs) const;
 };
 
 class state{
@@ -37,9 +41,15 @@ private:
 public:
 	char get(int x, int y);
 	state move(direction d) const;
+	vector<state> move_backward(direction d) const;
 
 	state();
 	state(const state& s);
+	state(const vector<row>& v);
+
+	bool operator<(const state& rhs) const;
 };
+
+vector<direction> solve(const state& st, const state& ed);
 
 #endif
