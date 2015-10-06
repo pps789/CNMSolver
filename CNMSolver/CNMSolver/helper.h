@@ -14,7 +14,7 @@ using namespace std;
 enum direction { L, R, D, U, DIR_LAST };
 const char WALL = 'W', BLOCK = 'B', EMPTY = '.';
 const int ROW_MAX = 6561;
-const int ANS_MAX = 30;
+const int ANS_MAX = 31;
 
 class row{
 private:
@@ -81,7 +81,7 @@ private:
 public:
 	heuristic_engine(const state& s);
 
-	int heuristic(const state& st, const state& ed);
+	bool heuristic(const state& st, const state& ed, int upper_bound);
 };
 
 vector<direction> solve(const state& st, const state& ed);

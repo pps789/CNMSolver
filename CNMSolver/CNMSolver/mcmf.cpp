@@ -1,6 +1,8 @@
 #include"mcmf.h"
 
-MCMF::MCMF(int _n) :n(_n), g(_n), pi(_n, 0), distance(_n, -1) {};
+MCMF::MCMF(int _n)
+	:n(_n), g(_n), pi(_n, 0),
+	distance(_n, -1), min_capacity(_n), back(_n) {};
 
 void MCMF::add_edge(int from, int to, int cost, int capacity){
 	int from_size = g[from].size();
@@ -52,7 +54,7 @@ int MCMF::mcmf(int source, int sink){
 		int flow = min_capacity[sink];
 		for (int it = sink; it != source; it = g[it][back[it]].target){
 			int from = g[it][back[it]].target;
-			int to = sink;
+			int to = it;
 			edge& neg_edge = g[to][back[to]];
 			edge& pos_edge = g[from][neg_edge.rev];
 			ret += pos_edge.cost * flow;

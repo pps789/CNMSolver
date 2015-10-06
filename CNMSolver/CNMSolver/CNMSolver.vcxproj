@@ -71,14 +71,14 @@
   <ItemGroup>
     <ClCompile Include="heuristic.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mcmf.cpp" />
+    <ClCompile Include="maxflow.cpp" />
     <ClCompile Include="row.cpp" />
     <ClCompile Include="solver.cpp" />
     <ClCompile Include="state.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper.h" />
-    <ClInclude Include="mcmf.h" />
+    <ClInclude Include="maxflow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

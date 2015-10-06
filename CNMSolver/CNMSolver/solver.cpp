@@ -9,6 +9,7 @@ vector<direction> solve(
 		state s;
 	};
 	map<state, path> dp;
+	heuristic_engine HE(st);
 
 	path p;
 	p.c = 1;
@@ -34,6 +35,7 @@ vector<direction> solve(
 		if (cost > 0){
 			auto cond_next = here.get_next();
 			for (auto sd : cond_next){
+				if (!HE.heuristic(sd.first, ed, ANS_MAX - cost)) continue;
 				if (!dp.count(sd.first)){
 					p.c = cost + 1;
 					p.d = sd.second;
@@ -56,6 +58,7 @@ vector<direction> solve(
 			}
 			auto cond_prev = here.get_prev();
 			for (auto sd : cond_prev){
+				if (!HE.heuristic(st, sd.first, ANS_MAX - cost)) continue;
 				if (!dp.count(sd.first)){
 					p.c = cost - 1;
 					p.d = sd.second;
