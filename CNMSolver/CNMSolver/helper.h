@@ -63,4 +63,6 @@ public:
 
 vector<direction> solve(const state& st, const state& ed);
 
+int heuristic(const state& st, const state& ed);
+
 #endif
