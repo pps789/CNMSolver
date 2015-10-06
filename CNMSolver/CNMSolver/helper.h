@@ -31,6 +31,8 @@ public:
 	row move(direction d) const; // only L, R.
 	vector<row> move_backward(direction d) const; // only L, R.
 
+	row get_vanilla() const;
+
 	row();
 	row(const row& r);
 	row(const string& s);
@@ -52,6 +54,8 @@ public:
 	vector<pair<state, direction> > get_next() const;
 	vector<pair<state, direction> > get_prev() const;
 
+	state get_vanilla() const;
+
 	state();
 	state(const state& s);
 	state(const vector<row>& v);
@@ -61,8 +65,19 @@ public:
 	bool operator!=(const state& rhs) const;
 };
 
+class heuristic_engine{
+private:
+	int dp[8][8][8][8];
+	const static int dx[], dy[];
+	inline int get_distance(
+		int from_x, int from_y, int to_x, int to_y
+		);
+public:
+	int heuristic(const state& st, const state& ed);
+};
+
 vector<direction> solve(const state& st, const state& ed);
 
-int heuristic(const state& st, const state& ed);
+const int heuristic_engine::dx[] = { 1, -1, 0, 0 }, dy[] = { 0, 0, -1, 1 };
 
 #endif
