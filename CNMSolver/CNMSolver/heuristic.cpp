@@ -1,6 +1,8 @@
 #include"helper.h"
 #include"mcmf.h"
 
+const int heuristic_engine::dx[] = { 1, -1, 0, 0 }, heuristic_engine::dy[] = { 0, 0, -1, 1 };
+
 void heuristic_engine::update_dp(int x, int y){
 	auto &here = dp[x][y];
 	queue<pair<int, int> > q;

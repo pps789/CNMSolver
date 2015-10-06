@@ -113,6 +113,17 @@ vector<pair<state, direction> > state::get_prev() const{
 state state::get_vanilla() const{
 	vector<row> vr;
 	for (int i = 0; i < 8; i++)
-		vr.push_back(c[i].get_vanilla);
+		vr.push_back(c[i].get_vanilla());
 	return state(vr);
+}
+
+vector<pair<int, int> > state::get_blocks() const{
+	vector<pair<int, int> > ret;
+	for (int i = 0; i < 8; i++){
+		auto v = c[i].get_blocks();
+		for (auto j : v){
+			ret.emplace_back(i, j);
+		}
+	}
+	return ret;
 }

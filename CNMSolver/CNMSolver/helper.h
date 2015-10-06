@@ -34,6 +34,7 @@ public:
 	vector<row> move_backward(direction d) const; // only L, R.
 
 	row get_vanilla() const;
+	vector<int> get_blocks() const;
 
 	row();
 	row(const row& r);
@@ -84,7 +85,5 @@ public:
 };
 
 vector<direction> solve(const state& st, const state& ed);
-
-const int heuristic_engine::dx[] = { 1, -1, 0, 0 }, dy[] = { 0, 0, -1, 1 };
 
 #endif

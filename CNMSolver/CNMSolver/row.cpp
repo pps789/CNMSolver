@@ -115,3 +115,11 @@ row row::get_vanilla() const{
 			ret.c[i] = EMPTY;
 	return ret;
 }
+
+vector<int> row::get_blocks() const{
+	vector<int> ret;
+	for (int i = 0; i < 8; i++)
+		if (c[i] == BLOCK)
+			ret.push_back(i);
+	return ret;
+}
