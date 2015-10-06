@@ -30,6 +30,9 @@
     <ClCompile Include="heuristic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="mcmf.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper.h">

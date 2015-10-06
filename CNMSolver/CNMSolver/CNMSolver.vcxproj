@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="heuristic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mcmf.cpp" />
     <ClCompile Include="row.cpp" />
     <ClCompile Include="solver.cpp" />
     <ClCompile Include="state.cpp" />
