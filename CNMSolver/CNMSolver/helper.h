@@ -12,6 +12,7 @@ using namespace std;
 enum direction { L, R, D, U, DIR_LAST };
 const char WALL = 'W', BLOCK = 'B', EMPTY = '.';
 const int ROW_MAX = 6561;
+const int ANS_MAX = 30;
 
 class row{
 private:
