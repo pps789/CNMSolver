@@ -5,6 +5,7 @@
 #include<queue>
 #include<string>
 #include<cstring>
+#include<climits>
 using namespace std;
 
 #ifndef _HELPER_H_
@@ -54,6 +55,8 @@ public:
 
 	vector<pair<state, direction> > get_next() const;
 	vector<pair<state, direction> > get_prev() const;
+
+	vector<pair<int, int> > get_blocks() const;
 
 	state get_vanilla() const;
 

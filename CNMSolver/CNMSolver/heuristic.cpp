@@ -39,3 +39,32 @@ inline int heuristic_engine::get_distance(
 	int from_x, int from_y, int to_x, int to_y){
 	return dp[from_x][from_y][to_x][to_y];
 }
+
+int heuristic_engine::heuristic(const state& st, const state& ed){
+	auto sts = st.get_blocks();
+	auto eds = ed.get_blocks();
+
+	MCMF mcmf(sts.size() + eds.size() + 2);
+	int source = 0, sink = sts.size() + eds.size() + 1;
+	for (int i = 1; i <= sts.size(); i++){
+		mcmf.add_edge(source, i, 0, 1);
+	}
+	for (int i = 1; i <= sts.size(); i++){
+		for (int j = 1; j <= eds.size(); j++){
+			mcmf.add_edge(
+				i,
+				sts.size() + j,
+				get_distance(sts[i].first, sts[i].second, eds[j].first, eds[j].second),
+				1);
+		}
+	}
+	for (int j = 1; j <= eds.size(); j++){
+		mcmf.add_edge(
+			sts.size() + j,
+			sink,
+			0,
+			1);
+	}
+
+	return mcmf.mcmf(source, sink);
+}
