@@ -107,3 +107,11 @@ bool row::operator==(const row& rhs) const{
 
 map<row, row> row::m[2];
 map<row, vector<row> > row::b[2];
+
+row row::get_vanilla() const{
+	row ret(*this);
+	for (int i = 0; i < 8; i++)
+		if (ret.c[i] == BLOCK)
+			ret.c[i] = EMPTY;
+	return ret;
+}

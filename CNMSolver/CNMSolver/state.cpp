@@ -109,3 +109,10 @@ vector<pair<state, direction> > state::get_prev() const{
 	}
 	return ret;
 }
+
+state state::get_vanilla() const{
+	vector<row> vr;
+	for (int i = 0; i < 8; i++)
+		vr.push_back(c[i].get_vanilla);
+	return state(vr);
+}

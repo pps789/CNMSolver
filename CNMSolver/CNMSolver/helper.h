@@ -4,6 +4,7 @@
 #include<iostream>
 #include<queue>
 #include<string>
+#include<cstring>
 using namespace std;
 
 #ifndef _HELPER_H_
@@ -69,10 +70,13 @@ class heuristic_engine{
 private:
 	int dp[8][8][8][8];
 	const static int dx[], dy[];
+	void update_dp(int x, int y);
 	inline int get_distance(
 		int from_x, int from_y, int to_x, int to_y
 		);
 public:
+	heuristic_engine(const state& s);
+
 	int heuristic(const state& st, const state& ed);
 };
 
